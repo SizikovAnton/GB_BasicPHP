@@ -32,8 +32,6 @@ if (isset($_POST['load'])) {
             $image->save($path_small);
             
             header("Location: index.php");
-
-            echo "ЗБС!";
         } else {
             echo "Ошибка";
         }

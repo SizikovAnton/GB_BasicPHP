@@ -54,6 +54,10 @@ switch ($page) {
         ];
         echo json_encode($params, JSON_UNESCAPED_UNICODE);
         exit;
+    case 'gallery':
+        $params['galleryPath'] = '/upload/gallery';
+        $params['images'] = getGallery('upload/gallery'); //Или тут лучше абсолютный путь использовать?
+        break;
 }
 
 

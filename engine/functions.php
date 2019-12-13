@@ -31,3 +31,10 @@ function renderTemplate($page, $params = [])
 
     return ob_get_clean();
 }
+
+
+//Функция возвращает содержимое папки $path с миниатюрами галереи
+function getGallery (string $path) {
+    $source = array_splice(scandir("{$path}/small/"), 2);
+    return $source;
+}
