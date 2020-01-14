@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Дек 16 2019 г., 21:43
+-- Время создания: Янв 14 2020 г., 23:44
 -- Версия сервера: 8.0.15
--- Версия PHP: 7.3.2
+-- Версия PHP: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,29 @@ SET time_zone = "+00:00";
 --
 -- База данных: `geekbrains`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `catalog`
+--
+
+CREATE TABLE `catalog` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `description` text NOT NULL,
+  `image` text NOT NULL,
+  `price` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `catalog`
+--
+
+INSERT INTO `catalog` (`id`, `name`, `description`, `image`, `price`) VALUES
+(1, 'item1', 'item1 desc', 'item1.jpg', 100),
+(2, 'item2', 'item2 desc', 'item2.jpg', 100),
+(3, 'item3', 'item3 desc', 'item3.jpg', 300);
 
 -- --------------------------------------------------------
 
@@ -62,7 +85,10 @@ INSERT INTO `feedback` (`id`, `name`, `feedback`) VALUES
 (2, 'Петя', 'Хороший сайт'),
 (3, 'Евгения Арестова', 'Пока'),
 (4, 'Петя!!!', ' Очень даже'),
-(5, 'Петя', 'Хороший сайт');
+(5, 'Петя', 'Хороший сайт'),
+(9, 'Василий', 'Неплохо'),
+(26, 'Василий', 'Терпимо1'),
+(28, 'Георгий', 'Вроде работает');
 
 -- --------------------------------------------------------
 
@@ -126,6 +152,12 @@ INSERT INTO `news` (`id`, `category`, `prev`, `text`) VALUES
 --
 
 --
+-- Индексы таблицы `catalog`
+--
+ALTER TABLE `catalog`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `category`
 --
 ALTER TABLE `category`
@@ -154,6 +186,12 @@ ALTER TABLE `news`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `catalog`
+--
+ALTER TABLE `catalog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT для таблицы `category`
 --
 ALTER TABLE `category`
@@ -163,7 +201,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT для таблицы `images`

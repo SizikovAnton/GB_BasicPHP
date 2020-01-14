@@ -1,23 +1,3 @@
-<?php 
-include 'math.php';
-
-$errors = [];
-$result;
-
-if(empty($_POST['operand1'])) {
-    $errors[] = "Укажите первый операнд";
-}
-
-if(empty($_POST['operand2'])) {
-    $errors[] = "Укажите второй операнд";
-}
-
-if(empty($errors)) {
-    $result = mathOperation($_POST['operand1'], $_POST['operand2'], $_POST['operation']);
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,39 +7,41 @@ if(empty($errors)) {
     <title>Document</title>
 </head>
 <body>
-    <? foreach ($errors as $error) echo $error . '<br>'?>
+        <div id="error"></div>
+        <input type="text" id="operand1" name="operand1" value="<?= $_POST['operand1'] ?>">
 
-    <form action="" method="post">
-        <input type="text" name="operand1" value="<?= $_POST['operand1'] ?>">
+        <button name="operation" value="sum">+</button>
+        <button name="operation" value="minus">-</button>
+        <button name="operation" value="multiplic">*</button>
+        <button name="operation" value="division">/</button>
 
-        <button type="submit" name="operation" value="sum">+</button>
-        <button type="submit" name="operation" value="minus">-</button>
-        <button type="submit" name="operation" value="multiplic">*</button>
-        <button type="submit" name="operation" value="division">/</button>
-
-        <input type="text" name="operand2" value="<?= $_POST['operand2'] ?>">
+        <input type="text" id="operand2" name="operand2" value="<?= $_POST['operand2'] ?>">
         
         <label for="result">=</label>
-        <input type="text" name="result" value="<?= $result ?>">
-    </form>
+        <input type="text" id="result" name="result" value="<?= $result ?>">
 
+    <script src="ajax.js"></script>
     <script>
-        function calculate(url, data){
-            return fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-                .then(result => result.json())
-                .catch(error => console.log(error));
+        function calc(eventObj) {
+            data = {
+                operand1: document.getElementById('operand1').value,
+                operand2: document.getElementById('operand2').value,
+                operation: eventObj.srcElement.value,
+            };
+            if(data['operand1'] == "" || data['operand2'] == "") {
+                document.getElementById('error').innerHTML = "Указаны не все операнды!";
+            } else {
+                calculate('calcAjax.php', data)
+                .then(result => document.getElementById('result').value = result['result'])
+                .catch(error => console.error(error));
+                document.getElementById('error').innerHTML = "";
+            }     
         }
 
-    window.onload = function() {
-        calculate("test.php", {operand1: 8})
-        .then(result => console.log(result))
-        .catch(error => console.error(error));
+        window.onload = function() {
+        document.getElementsByName('operation').forEach(button => {
+            button.onclick = calc;
+        });
     };
     </script>
 

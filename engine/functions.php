@@ -14,7 +14,7 @@ function prepareVariables($page, $action)
         case 'feedback':
             doFeedbackAction($params, $action);
 
-            $params['feedback'] = getAllFeedback();
+            $params['allFeedback'] = getAllFeedback();
             break;
 
         case 'index':
@@ -31,20 +31,11 @@ function prepareVariables($page, $action)
 
             break;
         case 'catalog':
-            $params['catalog'] = [
-                [
-                    'name' => 'Пицца',
-                    'price' => 24
-                ],
-                [
-                    'name' => 'Чай',
-                    'price' => 1
-                ],
-                [
-                    'name' => 'Яблоко',
-                    'price' => 12
-                ],
-            ];
+            //doCatalogAction($params, $action);
+            $params['catalog'] = readCatalog();
+            break;
+        case 'catalogItem':
+            $params['catalogItem'] = readCatalogItem($_GET['id']);
             break;
         case 'apicatalog':
             $params['catalog'] = [

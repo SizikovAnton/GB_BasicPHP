@@ -16,3 +16,4 @@ include "../engine/feedback.php";
 include "../engine/functions.php";
 include "../engine/log.php";
 include "../engine/news.php";
+include "../engine/catalog.php";
